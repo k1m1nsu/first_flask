@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% block content %}
+<!-- register content -->
+
+<div class="container">
+    <h5 class="my-3 border_bottom pb-2"> register question</h5>
+    <form method="post" class="my-3">
+        {{form.csrf_token}}
+        <!--
+        {{form.subject.label}}
+        {{form.subject(class="form-control")}}
+
+        {{form.content.label}}
+        {{form.content(class="form-control")}}
+
+        <button type="submit" class="btn btn-primary"> register</button>
+        -->
+        <!-- errors alert start -->
+        {% if form.errors %}
+        <div class="alert alert-danger" role="alert">
+
+            {% for field,errors in form.errors.items() %}
+            <strong>{{form[field].label}}</strong>
+            <ul>
+                {% for error in errors %}
+                <li>{{error}}</li>
+                {% endfor %}
+            </ul>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        <!-- error alert end -->
+
+        <div class="mb-3">
+            <label for="subject">subject</label>
+            <input type="text" class="form-control" name="subject" id="subject" value="{{ form.subject.data or '' }}">
+        </div>
+        <div class="mb-3">
+            <label for="content">content</label>
+            <textarea class="form-control" name="content" id="content" rows="10" >{{form.content.data or ''}}</textarea>
+
+        </div>
+
+        <button type="submit" class="btn btn-primary">register</button>
+
+    </form>
+</div>
+
+
+{% endblock %}
